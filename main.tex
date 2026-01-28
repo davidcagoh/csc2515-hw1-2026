@@ -15,6 +15,35 @@
 \begin{document}
 \maketitle
 
+\section*{Question 1: Training and Testing Error Curves}
+
+This question illustrates the phenomena of underfitting and overfitting through idealized learning curves.
+
+\subsection*{(a) Error vs. Model Complexity}
+
+Figure~\ref{fig:complexity} shows training and testing error as a function of model complexity. As complexity increases, the training error decreases monotonically, since more expressive models can fit the training data more closely. In contrast, the testing error initially decreases as bias is reduced, reaches a minimum at an optimal complexity, and then increases due to overfitting and high variance.
+
+The Bayes error represents the irreducible error inherent in the data-generating process and serves as a lower bound on achievable performance.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/complexity_curve.png}
+    \caption{Training and testing error as a function of model complexity. The U-shaped test error curve illustrates the bias--variance tradeoff.}
+    \label{fig:complexity}
+\end{figure}
+
+\subsection*{(b) Error vs. Training Set Size}
+
+Figure~\ref{fig:datasize} depicts training and testing error as functions of the training set size for a fixed model complexity. As more data becomes available, the training error typically increases slightly, since fitting all data points perfectly becomes more difficult. Meanwhile, the testing error decreases as the model generalizes better.
+
+Both curves converge to the same asymptotic error level, which lies above the Bayes error. This reflects the fact that, even with infinite data, a fixed-capacity model cannot outperform the Bayes-optimal classifier.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/datasize_curve.png}
+    \caption{Training and testing error as a function of training set size. Increasing data reduces variance and improves generalization.}
+    \label{fig:datasize}
+\end{figure}
 
 \section*{Question 2: Nearest Neighbours \& High Dimensions}
 
