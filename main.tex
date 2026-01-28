@@ -15,6 +15,72 @@
 \begin{document}
 \maketitle
 
+
+\section*{Question 2: Nearest Neighbours \& High Dimensions}
+
+This question analyzes the behavior of squared Euclidean distances in high-dimensional spaces, illustrating the curse of dimensionality.
+
+\subsection*{(a) One-dimensional case}
+
+Let $X,Y \sim \mathrm{Unif}[0,1]$ be independent random variables, and define
+\[
+Z = (X-Y)^2.
+\]
+
+We first compute the expectation. By symmetry,
+\[
+\mathbb{E}[Z] = \int_0^1 \int_0^1 (x-y)^2 \, dx \, dy.
+\]
+Evaluating the inner integral,
+\[
+\int_0^1 (x-y)^2 dx = \int_0^1 (x^2 - 2xy + y^2) dx
+= \frac{1}{3} - y + y^2.
+\]
+Integrating over $y$ gives
+\[
+\mathbb{E}[Z] = \int_0^1 \left( \frac{1}{3} - y + y^2 \right) dy
+= \frac{1}{6}.
+\]
+
+Next, we compute the second moment:
+\[
+\mathbb{E}[Z^2] = \mathbb{E}[(X-Y)^4]
+= \int_0^1 \int_0^1 (x-y)^4 \, dx \, dy.
+\]
+Evaluating yields
+\[
+\mathbb{E}[Z^2] = \frac{1}{15}.
+\]
+Therefore,
+\[
+\mathrm{Var}(Z) = \mathbb{E}[Z^2] - \mathbb{E}[Z]^2
+= \frac{1}{15} - \left(\frac{1}{6}\right)^2
+= \frac{7}{180}.
+\]
+
+\subsection*{(b) $d$-dimensional case}
+
+Let $X,Y \in [0,1]^d$ with independent coordinates, and define the squared Euclidean distance
+\[
+R = \|X-Y\|_2^2 = \sum_{i=1}^d (X_i - Y_i)^2.
+\]
+Each term $(X_i-Y_i)^2$ is an independent copy of $Z$ from part (a). By linearity of expectation,
+\[
+\mathbb{E}[R] = \sum_{i=1}^d \mathbb{E}[Z] = \frac{d}{6}.
+\]
+Similarly, using independence,
+\[
+\mathrm{Var}(R) = \sum_{i=1}^d \mathrm{Var}(Z) = \frac{7d}{180}.
+\]
+
+\subsection*{(c) Interpretation in high dimensions}
+
+The maximum possible squared distance between two points in the unit cube $[0,1]^d$ is attained at opposite corners and equals $d$. In contrast, the expected squared distance satisfies
+\[
+\mathbb{E}[R] = \frac{d}{6}.
+\]
+Thus, typical pairwise distances are a constant fraction of the maximum distance. Moreover, since the standard deviation of $R$ scales as $\sqrt{d}$ while the mean scales as $d$, the relative variability $\sqrt{\mathrm{Var}(R)}/\mathbb{E}[R]$ decays like $1/\sqrt{d}$. This concentration phenomenon implies that, in high dimensions, most points are approximately the same distance apart, illustrating the curse of dimensionality for nearest-neighbor methods.
+
 \section*{Question 3: Information Theory Properties}
 
 Throughout, let $X,Y$ be discrete random variables with probability mass functions $p(x)$ and $q(x)$.
