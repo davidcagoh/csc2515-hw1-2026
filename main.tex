@@ -3,6 +3,7 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{geometry}
+\usepackage{float}
 \geometry{margin=1in}
 
 \title{Homework 1 \\ CSC2515 Winter 2026}
@@ -25,7 +26,7 @@ Figure~\ref{fig:complexity} shows training and testing error as a function of mo
 
 The Bayes error represents the irreducible error inherent in the data-generating process and serves as a lower bound on achievable performance.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/complexity_curve.png}
     \caption{Training and testing error as a function of model complexity. The U-shaped test error curve illustrates the bias--variance tradeoff.}
@@ -38,7 +39,7 @@ Figure~\ref{fig:datasize} depicts training and testing error as functions of the
 
 Both curves converge to the same asymptotic error level, which lies above the Bayes error. This reflects the fact that, even with infinite data, a fixed-capacity model cannot outperform the Bayes-optimal classifier.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/datasize_curve.png}
     \caption{Training and testing error as a function of training set size. Increasing data reduces variance and improves generalization.}
@@ -207,7 +208,71 @@ I(X;Y) = \mathrm{KL}\big(p(x,y)\,\|\,p(x)p(y)\big).
 \]
 \end{proof}
 
-\section*{Question 4}
-Figures generated from code will be inserted here.
+\section*{Question 4: Experimental Results and Visualizations}
+
+
+In this question, we analyze the performance of different classifiers on the dataset and visualize the results.
+
+The accuracy of the decision tree classifier on the validation set is: \textbf{[0.8121]}, with parameters \verb|{'max_depth': None, 'criterion': 'gini'}|.
+
+Decision Tree Hyperparameter Sweep:
+\begin{verbatim}
+============================================================
+max_depth=2   , criterion=gini     -> Validation Accuracy: 0.7564
+max_depth=2   , criterion=entropy  -> Validation Accuracy: 0.7564
+max_depth=5   , criterion=gini     -> Validation Accuracy: 0.7707
+max_depth=5   , criterion=entropy  -> Validation Accuracy: 0.7723
+max_depth=10  , criterion=gini     -> Validation Accuracy: 0.7930
+max_depth=10  , criterion=entropy  -> Validation Accuracy: 0.7739
+max_depth=20  , criterion=gini     -> Validation Accuracy: 0.7882
+max_depth=20  , criterion=entropy  -> Validation Accuracy: 0.7850
+max_depth=None, criterion=gini     -> Validation Accuracy: 0.8121
+max_depth=None, criterion=entropy  -> Validation Accuracy: 0.7930
+============================================================
+\end{verbatim}
+
+\subsection*{(c) Decision Tree Visualization}
+
+Figure~\ref{fig:tree_viz} shows the visualization of the trained decision tree.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/q4_tree_viz.png}
+    \caption{Visualization of the trained decision tree.}
+    \label{fig:tree_viz}
+\end{figure}
+
+\subsection*{(d) Computing Information Gain}
+
+Information Gain for Top 10 Most Frequent Features:
+\begin{verbatim}
+================================================================================
+Feature: http                 | Information Gain: 0.015375
+Feature: global               | Information Gain: 0.092796
+Feature: warming              | Information Gain: 0.091983
+Feature: climate              | Information Gain: 0.071898
+Feature: change               | Information Gain: 0.063709
+Feature: bitly                | Information Gain: 0.006933
+Feature: rt                   | Information Gain: 0.016528
+Feature: snow                 | Information Gain: 0.014682
+Feature: new                  | Information Gain: 0.001755
+Feature: retwtme              | Information Gain: 0.005028
+\end{verbatim}
+\subsection*{(e) KNN Error Plot}
+
+Figure~\ref{fig:knn_error} displays the k-nearest neighbors error as a function of the number of neighbors.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/q4_knn_error.png}
+    \caption{K-nearest neighbors error plot as a function of the number of neighbors.}
+    \label{fig:knn_error}
+\end{figure}
+
+Best k: 7
+
+Training error at best k: 0.1287
+
+Validation error at best k: 0.1943
 
 \end{document}
