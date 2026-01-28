@@ -1,17 +1,118 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=1in}
 
-\title{Assignment Title}
+\title{Homework 1 \\ CSC2515 Winter 2026}
 \author{David}
 \date{\today}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
 
 \begin{document}
 \maketitle
 
-\section{Introduction}
-Hello, this is a sample LaTeX document.
+\section*{Question 3: Information Theory Properties}
 
-\section{Figures}
+Throughout, let $X,Y$ be discrete random variables with probability mass functions $p(x)$ and $q(x)$.
+
+\subsection*{(a) Entropy Non-negativity}
+
+\begin{theorem}
+For any discrete random variable $X$, the entropy satisfies $H(X) \ge 0$.
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+H(X) = -\sum_x p(x)\log p(x).
+\]
+For all $x$ with $p(x)>0$, we have $0 < p(x) \le 1$, hence $\log p(x) \le 0$ and so $- \log p(x) \ge 0$. Each term in the sum is therefore non-negative, implying $H(X) \ge 0$.
+\end{proof}
+
+\subsection*{(b) Chain Rule for Entropy}
+
+\begin{theorem}
+The joint entropy satisfies
+\[
+H(X,Y) = H(X) + H(Y \mid X).
+\]
+\end{theorem}
+
+\begin{proof}
+By definition of joint entropy,
+\[
+H(X,Y) = -\sum_{x,y} p(x,y)\log p(x,y).
+\]
+Using the factorization $p(x,y)=p(x)p(y\mid x)$,
+\[
+\begin{aligned}
+H(X,Y)
+&= -\sum_{x,y} p(x,y)\log\big(p(x)p(y\mid x)\big) \\
+&= -\sum_{x,y} p(x,y)\log p(x) - \sum_{x,y} p(x,y)\log p(y\mid x).
+\end{aligned}
+\]
+The first term simplifies to
+\[
+-\sum_x p(x)\log p(x) = H(X),
+\]
+and the second term is, by definition, $H(Y\mid X)$. Summing yields the desired identity.
+\end{proof}
+
+\subsection*{(c) Non-negativity of KL Divergence}
+
+\begin{theorem}
+For probability mass functions $p$ and $q$ on the same support,
+\[
+\mathrm{KL}(p\|q) = \sum_x p(x)\log\frac{p(x)}{q(x)} \ge 0.
+\]
+\end{theorem}
+
+\begin{proof}
+Rewrite the KL divergence as
+\[
+\mathrm{KL}(p\|q) = \mathbb{E}_p\!\left[ -\log\frac{q(X)}{p(X)} \right].
+\]
+The function $f(t)=-\log t$ is convex. By Jensen's inequality,
+\[
+\mathbb{E}_p[f(Z)] \ge f\big(\mathbb{E}_p[Z]\big),
+\]
+where $Z=\frac{q(X)}{p(X)}$. Therefore,
+\[
+\mathrm{KL}(p\|q) \ge -\log\!\left(\mathbb{E}_p\!\left[\frac{q(X)}{p(X)}\right]\right).
+\]
+But
+\[
+\mathbb{E}_p\!\left[\frac{q(X)}{p(X)}\right]
+= \sum_x p(x)\frac{q(x)}{p(x)} = \sum_x q(x) = 1.
+\]
+Hence $\mathrm{KL}(p\|q) \ge -\log 1 = 0$.
+\end{proof}
+
+\subsection*{(d) Mutual Information as KL Divergence}
+
+\begin{theorem}
+The mutual information satisfies
+\[
+I(X;Y) = \mathrm{KL}\big(p(x,y)\,\|\,p(x)p(y)\big).
+\]
+\end{theorem}
+
+\begin{proof}
+By definition,
+\[
+I(X;Y) = \sum_{x,y} p(x,y)\log\frac{p(x,y)}{p(x)p(y)}.
+\]
+This expression is exactly the KL divergence between the joint distribution $p(x,y)$ and the product of marginals $p(x)p(y)$. Hence,
+\[
+I(X;Y) = \mathrm{KL}\big(p(x,y)\,\|\,p(x)p(y)\big).
+\]
+\end{proof}
+
+\section*{Question 4}
+Figures generated from code will be inserted here.
 
 \end{document}
